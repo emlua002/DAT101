@@ -6,39 +6,69 @@
   </head>
   <body style="display: table-cell; vertical-align: middle">
     <h2><label for="txtOut">Output from Task 2.2:</label></h2>
-    <div style="padding: 10px; min-width: 512px; border: darkblue thin solid; background-color: antiquewhite; font-family: 'Courier New', serif">
+    <div style="padding: 10px; min-width: 512px; border: rgb(73, 9, 9) thin solid; background-color: rgb(255, 233, 233); font-family: 'Courier New', serif">
       <span id="txtOut"></span>
     </div>
     <ol>
       <li>Where should you use constants, and where should you use variables? Can they all be constants?</li>
       <p>
-				[Replace this with you answer]
+				Constants should be used for values that needs to remain fixed throughout the program. This can for example be the value of PI, speed of light, types of limits, days in a week, etc. Variables should be used for values that can change throughout a program, for example counters, user inputs, results. No, not all values can be constants, considering there are at multiple occasions where values needs to change.
 			</p>
       <li>How do parentheses affect the arithmetic outcome of an expression?</li>
       <p>
-				[Replace this with you answer]
+				Parantheses affect the arithmetic outcome of an expression by changing the order of the operations. This is because of the pemdas rule, which states the correct order for solving mathematical expressions. The first in order is paratheses.
 			</p>
       <li>How do we limit floating-point numbers to a given number of decimals?</li>
       <p>
-				[Replace this with you answer]
+				We can use the command "toFixed()" to limit floating-point numbers to a given number of decimals. However, this command returns a string, which means we have to convert it back to a number if we want that. Here is an example with both the fixed decimal command and the conversion back to a number::
+        <br /> let number = 87.654321;
+        <br /> let rounded = Number(number.toFixed(2));
+        <br /> This will give us the rounded result of 87.65
 			</p>
       <li>How can we compare two floating-point values to see if they are equal (is 12.199999 the same as 12.2)?</li>
       <p>
-				[Replace this with you answer]
+				In theory, we could use the "===" operator to compare to floating-point values to see if they are equal, since this is a comparison operator. But, since floating numbers are stored differently in a computer than whole numbers, this will not always work. Instead we could either round both numbers to a certain number of decimals, or we could check if the difference between these two numbers is smaller than a certain threshold. For example:
+        <br/> let num1 = 12.199999;
+        <br/> let num2 = 12.2;
+        <br/> let threshold = 0.00001; //Defines a small threshold value that we consider "close enough"
+        <br/> if (Math.abs(num1 - num2) < threshold) {
+        <br/>   console.log("The numbers are equal");
+        <br/> } else {
+        <br/>   console.log("The numbers are not equal");
+        <br/> }
+        <br/> By making this function we can run these commands and get the correct result read back to us.
 			</p>
       <li>What do comparison operators return, and how can we check if they are FALSE or TRUE?</li>
       <p>
-				[Replace this with you answer]
+				Comparison operators return a boolean value, which can either be TRUE or FALSE. We can check if the value is true or false by creating a if-else function, or by directly logging the result in to the console. For example:
+        <br/> let isEqual = (num1 === num2);
+        <br/> if (isEqual) {
+        <br/>   console.log("The numbers are equal");
+        <br/> } else {
+        <br/>   console.log("The numbers are not equal");
+        <br/> }
 			</p>
       <li>How does the Math.random() function work, and what can it be used for?</li>
       <p>
-				[Replace this with you answer]
+				The Math.random() function generates a random floating-point number between 0 and 1 (this number can be 0, but never 1) This can be used to for example create random values for games, to get a random number for testing or to pick a random item from a list. If i want it to be a number between 0 and 100 for example, i can use the code:
+        <br/> let randomNum = Math.random() * 101;
+        <br/> This will give me a random floating-point number between 0 and 100. However, if i want it to be a whole numbers i can use the code:
+        <br/> let randomWholeNum = Math.floor(Math.random() * 101); 
+        <br/> Math.floor will round the number down to the nearest whole number, if i want it to get rounded up instead, i would use Math.ceil
 			</p>
       <li>What is modulus (%), and when do we need this operator in mathematical operations?</li>
       <p>
-				[Replace this with you answer]
+				Modulus (%) is a mathematical operator, that returns the remainder of a division. Instead of dividing two numbers normally, for example 10 / 3 = 3.33333, we could write 10 % 3, which would give us the the remainder of the devision, which is one. Because 10 / 3 is 3 with a remainder of 1. We need this operator in mathematical operations when we need to check if a number is even or odd. We can check if a number is even by checking if the number % 2 is equal to 0.If it is, the number is even and if its not, its odd. Example of this:
+        <br/> let number = 9;
+        <br/> if (number % 2 === 0) {
+        <br/>   console.log("The number is even");
+        <br/> } else {
+        <br/>   console.log("The number is odd");
+        <br/> }
 			</p>
     </ol>
-		<script type="module" src="./task_2-2.mjs" defer></script>
+		<script type="module" src="./task_2-2.mjs" defer></script> 
   </body>
 </html>
+
+
