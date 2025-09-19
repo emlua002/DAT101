@@ -4,7 +4,7 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-//creating two variuables that holds the results of the original expression and the modified expression
+//creating two variables that holds the results of the original expression and the modified expression
 let originalExpression = 2 + 3 * 2 - 4 * 6
 let modifiedExpression = 2 + 3 * (2 - 4) * 6;
 printOut("the result of the original expression, 2 + 3 * 2 - 4 * 6, is: " + originalExpression + ". While the the results of the modified expression, 2 + 3 * (2 - 4) * 6 is: " + modifiedExpression);
@@ -39,12 +39,12 @@ printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-//to solve this i will use the operator %=. This is a "remainder assigment operator", which assigns the remainder of a division to the variable. This way i can keep track of how many minutes are left after converting to days and hours
+//to solve this i will use the operator %=. This is a "remainder assignment operator", which assigns the remainder of a division to the variable. This way i can keep track of how many minutes are left after converting to days and hours
 
 //creating a variable for the total of minutes
 let inputMinutes = 6322.52;
 
-//creating a variable for days, and rounding down to the nearest whole number to avoid getting a fraction of a day. I dont use math.ceil because then i would not get the correct amount of hours, minutes and seconds
+//creating a variable for days, and rounding down to the nearest whole number to avoid getting a fraction of a day. I don't use math.ceil because then i would not get the correct amount of hours, minutes and seconds
 let days2 = Math.floor(inputMinutes / (24 * 60));
 
 //changing inputMinutes to the remainder of minutes left after converting to days
