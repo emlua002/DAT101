@@ -3,16 +3,44 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+//line 1 and 2
+let line1 = "";
+let line2 = "";
+
+//for loop to create two lines, one counting up and the other counting down
+for (let i = 1, j = 10; i <= 10; i++, j--) {
+  line1 += i + ", ";
+  line2 += j + ", ";
+}
+
+//printing out the two lines
+printOut(line1);
+printOut(line2);
+
 printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+//number that needs to be guessed
+const target = 30;
+let guess = 0;
+
+while (guess !== target) {
+    //generating a random number between 1 and 60
+    guess = Math.floor(Math.random() * 60) + 1;
+}
+
+//printing out when the guess is correct
+printOut(`Bingo! The correct number is ${guess}.`);
 printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+
+
+
 printOut("Replace this with you answer!");
 printOut(newLine);
 
