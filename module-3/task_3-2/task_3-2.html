@@ -10,8 +10,17 @@
       <span id="txtOut" style="white-space: nowrap"></span>
     </div>
     <ol>
-      <li>[Write the question here, and copy this for more questions]</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <li>In part 1, is it possible to solve the problem using a single "for" loop?</li>
+      <p>Yes, it is possible to solve it using a single "for" loop, because thats what i did.</p>
+
+      <li>In part 2, can we create what is known as an "infinite" loop within the condition of the "while" loop? Describe what would or would not be necessary to achieve this. Provide a thorough explanation of your answer.</li>
+      <p>yes, you can create an "infinite" loop using the while loop. My while loop is technically not an infinite loop, because there is a known end condition. We can achieve an infinite loop by writing while (true), and we need to ensure that there is a break statement or some other way to exit the loop, otherwise it will run indefinitely.</p>
+
+      <li>Discuss briefly how quickly or slowly a computer might be able to compute this, considering the number of guesses and the time it takes. How does the program behave while it is guessing? Can the program perform other tasks concurrently?</li>
+      <p>Each guess is very fast, taking only a few milliseconds. However, the total time taken depends on how many guesses are needed. While the loop is running, the browser is completely busy with that loop. You might see the browser freeze or become unresponsive if the loop takes too long. So no, the program cannot perform other tasks concurrently while it is guessing.</p>
+
+      <li>Explain the relationship between rows and columns in nested "for" loops. Can we, for instance, change the order, considering rows to be innermost or columns to be innermost, or does this not matter?</li>
+      <p>The outer loop (row) controls the number of rows (in this case, 7 rows), and the inner loop (column) controls the number of columns (in this case, 9 columns). So for each row, i build a string with all columns from 1 to 9, then print that row. If i change the order, the structure changes. The outer loop controls how many lines i print, meanwhile the inner loop controls what is inside each line. So, instead, each like is a column with all rows, and the columns gets printed vertically.</p>
     </ol>
     <script type="module" src="./task_3-2.mjs" defer></script>
   </body>

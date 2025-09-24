@@ -118,7 +118,7 @@ for (let student = 1; student <= 5; student++) {
 }
 
 // Printing out all the results
-printOut("Original Grades: \n" + allGrades);
+printOut("Original Grades: " + allGrades);
 
 // BONUS: sort and print from A to F without arrays
 // Grades from best to worst
@@ -132,6 +132,7 @@ for (let i = 0; i < gradeLetters.length; i++) {
   let index = 0;
   let line = "";
 
+  printOut("");
   printOut(`\nStudents with Grade ${currentGrade}:`);
 
    while (index < allGrades.length) {
@@ -149,6 +150,7 @@ for (let i = 0; i < gradeLetters.length; i++) {
     // Check if this line contains the current grade
     if (line.includes(`Grade ${currentGrade}`)) {
       printOut(line);
+      
     }
   }
 }
@@ -158,27 +160,50 @@ printOut(newLine);
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 
 // 3 Pairs
+// make a variable that holds the amount of throws
 let throws = 0;
+// infinite loop that breaks when pattern is found
 while (true) {
-  throws++;
+  // increment throw count
+  throws++; 
+  // stores the dice results for this throw
   let dice = [];
-  let count = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+  //creating a dice object, with a values set to 0 for each number on the dice
+  let count = { 
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0 
+  };
 
+  // for loop that rolls the dice 6 times
   for (let i = 0; i < 6; i++) {
+    // random number 1-6
     let roll = Math.floor(Math.random() * 6) + 1;
+    // pushes the current roll to the dice array
     dice.push(roll);
+    // increases count for that number
     count[roll]++;
   }
 
   let pairs = 0;
+  // counts how many numbers appeared exactly 2 times (pairs)
   for (let i = 1; i <= 6; i++) {
+    // adds the dice number that had the count of two to the pair variable
     if (count[i] === 2) pairs++;
   }
 
+  // if there are exactly three pairs, the wanted pattern is found
   if (pairs === 3) {
+    //prints out the dice values (f.ex 1, 1, 2, 2, 3, 3)
     printOut(dice.join(","));
+    // prints out the pattern name
     printOut("3 Pairs");
+    // prints out the amount of throws
     printOut(`In ${throws} throws!`);
+    //prints out an empty line
     printOut("");
     break;
   }
@@ -189,15 +214,26 @@ throws = 0;
 while (true) {
   throws++;
   let dice = [];
-  let found = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+  // object that tracks which numbers (1-6) have been rolled; true means the number is found
+  let found = { 
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false 
+  };
 
   for (let i = 0; i < 6; i++) {
     let roll = Math.floor(Math.random() * 6) + 1;
     dice.push(roll);
+    // mark this number as found
     found[roll] = true;
   }
 
+  // assume it is a straight until proven otherwise
   let straight = true;
+  // loop that goes through the numbers 1, 2, 3, 4, 5 and 6, and checks if their value is true
   for (let i = 1; i <= 6; i++) {
     if (!found[i]) straight = false;
   }
@@ -216,7 +252,14 @@ throws = 0;
 while (true) {
   throws++;
   let dice = [];
-  let count = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+  let count = { 
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0 
+  };
 
   for (let i = 0; i < 6; i++) {
     let roll = Math.floor(Math.random() * 6) + 1;
@@ -224,14 +267,18 @@ while (true) {
     count[roll]++;
   }
 
+  // variables with boolean values
   let hasFour = false;
   let hasTwo = false;
 
+  // checks count for 4 of a kind and 2 of a kind
   for (let i = 1; i <= 6; i++) {
+    //changes the boolean values if condition is true
     if (count[i] === 4) hasFour = true;
     if (count[i] === 2) hasTwo = true;
   }
 
+  // pattern is found if both hasFour is true and hasTwo is true
   if (hasFour && hasTwo) {
     printOut(dice.join(","));
     printOut("Tower");
@@ -246,7 +293,14 @@ throws = 0;
 while (true) {
   throws++;
   let dice = [];
-  let count = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+  let count = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0
+  };
 
   for (let i = 0; i < 6; i++) {
     let roll = Math.floor(Math.random() * 6) + 1;
@@ -255,6 +309,7 @@ while (true) {
   }
 
   let yahtzee = false;
+  // check if all 6 dice show the same number
   for (let i = 1; i <= 6; i++) {
     if (count[i] === 6) yahtzee = true;
   }
