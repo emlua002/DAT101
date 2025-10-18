@@ -10,8 +10,28 @@
       <span id="txtOut" style="white-space: nowrap"></span>
     </div>
     <ol>
-      <li>[Write the question here, and copy this for more questions]</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+
+      <li>What is the difference between invoking and creating a function?</li>
+      <p>Creating a function is when you give it a name, parameters and a body. it doesn't run yet. Invoking a function is when you actually call it to run the code inside it.</p>
+      
+      <li>Explain the syntax regarding semicolons and code blocks.</li>
+      <p>Semicolons are used to mark the end of a statement, while code blocks are defined by curly brackets { } and define groups of statements that belong together. For example functions, loops conditionals etc.</p>
+
+      <li>What happens when we try to store values from a function when it doesn't return any?</li>
+      <p>If a function doesn't return a value, it automatically returns "undefined". This is because nothing was returned.</p>
+
+      <li>How do we separate parameters from each other when creating a function?</li>
+      <p>When we are creating a function, we separate parameters from each others by using commas. For example -> function myFunction(parameter1, parameter2)</p>
+
+      <li>Explain how parameter names are related during the invocation and creation of a function</li>
+      <p>When we create a function, we define parameter names, which works as placeholders for the values. When we invoke the function, we give it arguments that match the parameter names in both position and type. That is why it is a good practice to have descriptive parameter names.</p>
+
+      <li>Explain why a parameter is undefined when a function call is missing a parameter.</li>
+      <p>If you define a parameter without giving an argument for that parameter, it will automatically be assigned the value "undefined". This is because JavaScript does not give an error for missing parameters.</p>
+
+      <li>Explain what happens when we use recursive functions.</li>
+      <p>A recursive function is one that calls itself. It will keep going until it reaches a "base case". Which is a condition that stops the recursion. Each function call adds a new layer to the call stack. If we don't have a base case, the function will continue to call itself forever, leading to a stock overflow error.</p>
+
     </ol>
     <script type="module" src="./task_3-3.mjs" defer></script>
   </body>

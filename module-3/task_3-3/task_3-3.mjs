@@ -89,31 +89,31 @@ printOut("--- Part 5 -----------------------------------------------------------
 function conversion(temperature, type) {
     // if the type is Fahrenheit, convert to Celsius and Kelvin
     if (type === "Fahrenheit" || type === "fahrenheit") {
-        const celcius = Math.round((temperature - 32) * (5 / 9))
+        const celsius = Math.round((temperature - 32) * (5 / 9))
         const kelvin = Math.round(((temperature - 32) * (5 / 9)) + 273.15)
 
-        printOut(`${temperature} degrees fahrenheit is ${celcius} degrees celsius and ${kelvin} degrees kelvin`);
-    } 
-    // if the type is Celcius, convert to Fahrenheit and Kelvin
-    else if (type === "Celcius" || type === "celcius") {
+        printOut(`${temperature} degrees fahrenheit is ${celsius} degrees celsius and ${kelvin} degrees kelvin`);
+    }
+    // if the type is Celsius, convert to Fahrenheit and Kelvin
+    else if (type === "Celsius" || type === "celsius") {
         const fahrenheit = Math.round(temperature * (9 / 5) + 32);
         const kelvin = Math.round(temperature + 273.15);
 
         printOut(`${temperature} degrees celsius is ${fahrenheit} degrees fahrenheit and ${kelvin} degrees kelvin`);
     }
-    // if the type is Kelvin, convert to Fahrenheit and Celcius
+    // if the type is Kelvin, convert to Fahrenheit and Celsius
     else {
-        const celcius = Math.round(temperature - 273.15);
+        const celsius = Math.round(temperature - 273.15);
         const fahrenheit = Math.round((temperature - 273.15) * (9 / 5) + 32);
 
-        printOut(`${temperature} degrees kelvin is ${celcius} degrees celsius and ${fahrenheit} degrees fahrenheit`);
+        printOut(`${temperature} degrees kelvin is ${celsius} degrees celsius and ${fahrenheit} degrees fahrenheit`);
     }
 
     
 }
 
 conversion(100, "Fahrenheit");
-conversion(0, "Celcius");
+conversion(0, "Celsius");
 conversion(50, "Kelvin");
 
 printOut(newLine);
@@ -276,6 +276,18 @@ printOut(newLine);
 
 /* Task 10*/
 printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+// factorial function
+function factorial(n) {
+    // Base case: factorial of 0 or 1 is 1. without this, the function would call itself forever, causing it to crash
+    if (n === 0 || n === 1) {
+        // returns 1 when n is 0 or 1
+        return 1;
+        // Recursive case: n! = n * (n-1)! this keeps calling the function with decremented values of n until it reaches the base case
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+// this will print out the formula for 5! which is 5 * 4 * 3 * 2 * 1 = 120
+printOut(factorial(5));
 printOut(newLine);
