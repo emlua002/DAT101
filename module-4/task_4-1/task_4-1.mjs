@@ -2,13 +2,25 @@
 import { printOut, newLine } from "../../common/script/utils.mjs";
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+//object with account types in Norwegian
+const accountType = {
+    Normal: "Brukskonto",
+    Savings: "Sparekonto",
+    Credit: "Kredittkonto",
+    Pension: "Pensjonskonto"
+}
+
+printOut(`${accountType.Normal}, ${accountType.Savings}, ${accountType.Credit}, ${accountType.Pension}`); // Brukskonto, Sparekonto, Kredittkonto, Pensjonskonto
+
 printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+class TAccount {
+    constructor(account)
+}
+
 printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
