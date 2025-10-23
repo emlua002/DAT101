@@ -6,7 +6,7 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
 
 // ---------- Part 1: Account types ----------
 // Defines account types in an object
-const AccountType = {
+const accountType = {
     Normal: "Brukskonto",
     Saving: "Sparekonto",
     Credit: "Kredittkonto",
@@ -17,36 +17,6 @@ printOut(`${accountType.Normal}, ${accountType.Savings}, ${accountType.Credit}, 
 
 printOut(newLine);
 
-printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
-
-
-printOut(newLine);
-
-printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
-printOut(newLine);
-
-printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
-printOut(newLine);
-
-printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
-printOut(newLine);
-
-printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
-printOut(newLine);
-
-printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
-printOut(newLine);
-};
 
 // Prints all account types and separates them with commas
 printOut(Object.values(AccountType).join(", "));
