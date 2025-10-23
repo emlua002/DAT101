@@ -17,9 +17,6 @@ printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 
-class TAccount {
-    constructor(account)
-}
 
 printOut(newLine);
 
