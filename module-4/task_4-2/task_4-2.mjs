@@ -7,10 +7,12 @@ printOut("--- Part 1 -----------------------------------------------------------
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
 // For loop to loop through the numbers array and print out each number
+let part1Text = "";
 for (let i = 0; i < numbers.length; i++) {
-    // Print out the current number
-    printOut(numbers[i]);
+    const value = numbers[i];
+    part1Text += value.toString() + " ";
 }
+printOut(part1Text);
 printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
