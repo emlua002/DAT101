@@ -18,6 +18,38 @@
     <canvas id="cvs" style="background-color: antiquewhite" width="1024" height="512"></canvas>
   </body>
   <script defer>
+    const cvs = document.getElementById("cvs");
+    const ctx = cvs.getContext("2d");
+    const sonicPath = "sonic_sprite_sheet.png";
+    const sonicSheet = new Image();
+    const Sonic2 = {x: 0, y: 127, width: 102, height: 121, count: 9};
+    let frameNumber = 0;
+    let posX = 0;
+    let hero = Sonic2;
+
+    function animate() {
+      ctx.clearRect(0, 0, cvs.width, cvs.height);
+      const dx = 0, dy = 100, dw = Sonic2.width, dh = Sonic2.height
+      const sx = frameNumber * Sonic2.width, sy = Sonic2.y, sw = Sonic2.width, sh = Sonic2.height
+      ctx.drawImage(sonicSheet, sx, sy, sw, sh, dx + posX, dy, dw, dh);
+      frameNumber++;
+      if(frameNumber >= Sonic2.count) {
+        frameNumber = 0;
+      }
+      if(posX < cvs.width - Sonic2.width) {
+        posX += 15;
+      }
+      else {
+        posX = cvs.width- Sonic2.width; 
+      }
+    }
+
+    function sonicSheetLoaded() {
+      console.log("Sprite Sheet Loaded!");
+      setInterval(animate, 75);
+    }
+    sonicSheet.addEventListener("load", sonicSheetLoaded);
+    sonicSheet.src = sonicPath;
 
   </script>
 </html>
