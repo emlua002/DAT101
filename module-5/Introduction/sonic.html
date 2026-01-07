@@ -13,43 +13,117 @@
         user-select: none; /* Standard syntax */
       }
     </style>
+    <!-- Import map: map the bare specifier "three" to the local module build. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "libSprite": "../../common/script/libSprite.mjs",
+          "lib2d": "../../common/script/lib2d.mjs"
+        }
+      }
+    </script>
   </head>
   <body class="prevent-select">
-    <canvas id="cvs" style="background-color: antiquewhite" width="1024" height="512"></canvas>
+    <canvas id="cvs" style="background-color: rgb(251, 196, 205)" width="1024" height="512"></canvas>
   </body>
-  <script defer>
+  <script type="module"defer>
+    // Import libraries
+    import { TSpriteCanvas, TSprite } from "libSprite";
+
+    // prettier-ignore
+  const SpriteInfoList = {
+    sonic1: { x: 0, y:   0, width: 102, height: 125, count: 6},
+    sonic2: { x: 0, y: 125, width: 102, height: 125, count: 9},
+    sonic3: { x: 0, y: 250, width: 102, height: 125, count: 9},
+    sonic4: { x: 0, y: 375, width: 102, height:  75, count: 7},
+    sonic5: { x: 0, y: 450, width: 100, height: 130, count: 5},
+    sonic6: { x: 0, y: 575, width: 102, height: 125, count: 3},
+    sonic7: { x: 0, y: 700, width: 102, height: 125, count: 2},
+    sonic8: { x: 0, y: 825, width: 102, height: 125, count: 2},
+    sonic9: { x: 0, y: 950, width: 102, height: 125, count: 4}
+  }
+
+    // Global variables
     const cvs = document.getElementById("cvs");
     const ctx = cvs.getContext("2d");
-    const sonicPath = "sonic_sprite_sheet.png";
-    const sonicSheet = new Image();
-    const Sonic2 = {x: 0, y: 127, width: 102, height: 121, count: 9};
-    let frameNumber = 0;
-    let posX = 0;
-    let hero = Sonic2;
+    const spcvs = new TSpriteCanvas(cvs);
+    const hero1 = new TSprite(spcvs, SpriteInfoList.sonic2, 0, 100);
+    const hero2 = new TSprite(spcvs, SpriteInfoList.sonic4, 0, 250)
+    const hero3 = new TSprite(spcvs, SpriteInfoList.sonic1, 100, 350)
+    const hero4 = new TSprite(spcvs, SpriteInfoList.sonic2, 500, 250)
+
+    // Functions
+
+    function drawCanvas() {
+      // This is a high performance function
+      // Do not do any heave calculation here
+      hero1.draw();
+      hero2.draw();
+      hero3.draw();
+      hero4.draw();
+    }
+
+    let dir = 1; // 1 = right, -1 = left
+    let dir2 = 1;
 
     function animate() {
-      ctx.clearRect(0, 0, cvs.width, cvs.height);
-      const dx = 0, dy = 100, dw = Sonic2.width, dh = Sonic2.height
-      const sx = frameNumber * Sonic2.width, sy = Sonic2.y, sw = Sonic2.width, sh = Sonic2.height
-      ctx.drawImage(sonicSheet, sx, sy, sw, sh, dx + posX, dy, dw, dh);
-      frameNumber++;
-      if(frameNumber >= Sonic2.count) {
-        frameNumber = 0;
+
+      // Hero 1 animation
+      hero1.x += 3 * dir;
+      if ((hero1.x > cvs.width - hero1.width) || (hero1.x + hero1.width < 0 && dir < 0)) {
+        dir *= -1;
+        hero1.flipHorizontal() = true;  
       }
-      if(posX < cvs.width - Sonic2.width) {
-        posX += 15;
-      }
-      else {
-        posX = cvs.width- Sonic2.width; 
+
+      // Hero 2 animation
+      hero2.x += 4 * dir2;
+      if ((hero2.x > cvs.width - hero2.width) || (hero2.x + hero2.width < 0 && dir2 < 0)) {
+        dir2 *= -1;
+        hero2.flipHorizontal() = true;  
       }
     }
 
-    function sonicSheetLoaded() {
-      console.log("Sprite Sheet Loaded!");
-      setInterval(animate, 75);
-    }
-    sonicSheet.addEventListener("load", sonicSheetLoaded);
-    sonicSheet.src = sonicPath;
+    function sheetLoaded() {
+      console.log("Sheet loaded");
+      spcvs.showFramerate = true;
+      spcvs.onDraw = drawCanvas;
 
-  </script>
+      hero1.animationSpeed = 17;
+      hero1.rotation = 0;
+      hero1.hidden = true;
+
+      hero2.animationSpeed = 10;
+      hero2.hidden = true;
+
+      hero3.animationSpeed = 4;
+      hero3.hidden = true;
+
+      hero4.animationSpeed = 15;
+
+      // Start animation
+      setInterval(animate, 500 / 60);
+    }
+
+    function onKeyDown(aEvent) {
+      switch(aEvent.code) {
+        case "ArrowUp":
+          hero4.y -= 40
+          break;
+        case "ArrowDown":
+          hero4.y += 40
+          break;
+        case "ArrowLeft":
+          hero4.x -= 40
+          break;
+        case "ArrowRight":
+          hero4.x += 40
+          break;  
+      }
+    }
+
+    // Main applications
+    spcvs.loadSpriteImage("sonic_sprite_sheet.png", sheetLoaded);  
+    document.addEventListener("keydown", onKeyDown);
+
+    </script>
 </html>
