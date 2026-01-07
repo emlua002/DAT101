@@ -123,8 +123,11 @@ const keys = Object.keys(EWeekDays);
 
 // Loop through the keys array and print elements
 for (let i = 0; i < keys.length; i++) {
+    // Get the key and corresponding element
   const key = keys[i];
+  // Get the element from the current key
   const element = EWeekDays[key];
+  // Print out the key, value and name
   printOut(`${key}: value = ${element.value}, name = ${element.name}`);
 }
 
@@ -132,45 +135,106 @@ printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 
-// Create an array of 35 random numbers from 1 to 20
-const numbers2 = [];
-
+// Create an array that contains 35 random numbers from 1 to 20 (inclusive)
+const randomNumbers = [];
 for (let i = 0; i < 35; i++) {
-  // Generate a random number between 1 and 20
-  const randomNumber = Math.floor(Math.random() * 20) + 1;
-  numbers2.push(randomNumber);
+    const random = Math.floor(Math.random() * 20) + 1;
+    randomNumbers.push(random);
 }
 
 printOut("Original array:");
-printOut(numbers2);
+printOut(randomNumbers.join(", "));
 
-// Sort in ascending order (smallest → largest)
-// The callback (a, b) => a - b defines how two values are compared
-const ascending = [...numbers2].sort(function(a, b) {
-  return a - b;
+// Sort ascending using a callback
+// [...randomNumbers] creates a shallow copy of the array to avoid modifying the original
+// The sort function uses a callback to determine the order
+const ascending = [...randomNumbers].sort(function(a, b) {
+    return a - b;  // If a < b, result is negative → a comes first
 });
 
 printOut("Ascending order:");
-printOut(ascending);
+printOut(ascending.join(", "));
 
-// Sort in descending order (largest → smallest)
-const descending = [...numbers2].sort(function(a, b) {
-  return b - a;
+// Sort descending using a callback
+const descending = [...randomNumbers].sort(function(a, b) {
+    return b - a;  // If b < a, result is negative → b comes first
 });
 
 printOut("Descending order:");
-printOut(descending);
+printOut(descending.join(", "));
 
-printOut("Replace this with you answer!");
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+//create a place to store the counts by creating an object
+const frequency = {};
+
+for (let i = 0; i < randomNumbers.length; i++) {
+    const number = randomNumbers[i];
+    // check if the number is already a key in the frequency object, if so, increment its count, otherwise initialize it to 1
+    frequency[number] = (frequency[number] || 0) + 1;
+}
+
+printOut("Number frequencies:");
+
+// sort frequencies from highest to lowest
+Object.keys(frequency)
+    .sort((a, b) => a - b) // sort numbers from lowest to highest
+    .forEach((number) => {
+        printOut(`${number}: occurs ${frequency[number]} time(s)`);
+    });
+
+printOut(newLine);
+printOut("Frequencies and corresponding numbers:");
+
+// create an object to group numbers by their frequencies
+const frequencyGroups = {};
+
+// go through each number in the frequency object
+for (let number in frequency) {
+    const count = frequency[number];
+
+    // if this frequency is not yet a key in frequencyGroups, initialize it with an empty array
+    if (!frequencyGroups[count]) {
+        frequencyGroups[count] = [];
+    }
+
+    // add the number to the correct frequency group
+    frequencyGroups[count].push(Number(number));
+}
+    // sort frequencies from highest to lowest and print
+    Object.keys(frequencyGroups)
+        .sort((a, b) => b - a) // sort frequencies from highest to lowest
+        .forEach((count) => {
+            // sort numbers with the same frequency in ascending order
+            frequencyGroups[count].sort((a, b) => a - b);
+            printOut(`Frequency ${count}: Numbers ${frequencyGroups[count].join(", ")}`);
+        });
+    
+
+
 printOut(newLine);
 
 /* Task 10*/
 printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+let grid = [];
+
+// creates rows and columns
+for (let row = 0; row < 5; row++) {
+    grid[row] = []; // create a new row
+
+    // fill the row with columns
+    for (let col = 0; col < 9; col++) {
+        grid[row][col] = `Row ${row + 1}, Column ${col + 1}`; 
+    }
+}
+
+// loop to print the grid
+for (let row = 0; row < grid.length; row++) {
+    printOut(grid[row].join(" | "));
+}
+
+
 printOut(newLine);
