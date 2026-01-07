@@ -131,7 +131,36 @@ for (let i = 0; i < keys.length; i++) {
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
+
+// Create an array of 35 random numbers from 1 to 20
+const numbers2 = [];
+
+for (let i = 0; i < 35; i++) {
+  // Generate a random number between 1 and 20
+  const randomNumber = Math.floor(Math.random() * 20) + 1;
+  numbers2.push(randomNumber);
+}
+
+printOut("Original array:");
+printOut(numbers2);
+
+// Sort in ascending order (smallest → largest)
+// The callback (a, b) => a - b defines how two values are compared
+const ascending = [...numbers2].sort(function(a, b) {
+  return a - b;
+});
+
+printOut("Ascending order:");
+printOut(ascending);
+
+// Sort in descending order (largest → smallest)
+const descending = [...numbers2].sort(function(a, b) {
+  return b - a;
+});
+
+printOut("Descending order:");
+printOut(descending);
+
 printOut("Replace this with you answer!");
 printOut(newLine);
 
