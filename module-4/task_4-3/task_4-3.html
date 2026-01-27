@@ -97,8 +97,17 @@
   </div>
 </fieldset>
 <ol>
-  <li>[Write the question here, and copy this for more questions]</li>
-  <p>[Write your answer here, and copy this for more answers]</p>
+  <li>In this assignment, we use the DOM. Explain how this library can help us develop interactive web pages.</li>
+  <p>It can help us manipulate HTML elements dynamically by granting access to the document giving us the ability to change content, structure, and styles in response to user actions.</p>
+
+  <li>What is an event? Simply explain what happens when we add an event listener to an object.</li>
+  <p>An event is a detectable action or occurrence that happens in the system you are programming, like for example a button being clicked, key being pressed, a file loading etc. When we add an event listener to an object, we tell the object to monitor a spesific type of user interaction or system event.</p>
+
+  <li>Sometimes we need to use an event object to get data from the event. Explain how this event object is structured, don't explain all functions or attributes. Try to explain, for example, how to retrieve data from a keyboard or mouse.</li>
+  <p>When an event occurs, the browser passes an event object to us containing details about it. For a mouse event, it can tell the position of the click and which element was clicked, while for a keyboard event, it shows which key was pressed. You can use "event.target" to get the element that triggered the event.</p>
+
+  <li>Explain the main difference between DOM id and DOM name. Can we have identical IDs?</li>
+  <p>Main difference is that the id attribute must be unique, while the name attribute can be shared among multiple elements. No, we cannot have identical IDs.</p>
 </ol>
 <script type="module" src="./task_4-3.mjs" defer></script>
 </body>

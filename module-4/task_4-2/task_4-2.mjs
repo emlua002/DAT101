@@ -135,34 +135,36 @@ printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 
-// Create an array that contains 35 random numbers from 1 to 20 (inclusive)
-const randomNumbers = [];
+// Create an array of 35 random numbers from 1 to 20
+const numbers2 = [];
+
 for (let i = 0; i < 35; i++) {
-    const random = Math.floor(Math.random() * 20) + 1;
-    randomNumbers.push(random);
+  // Generate a random number between 1 and 20
+  const randomNumber = Math.floor(Math.random() * 20) + 1;
+  numbers2.push(randomNumber);
 }
 
 printOut("Original array:");
-printOut(randomNumbers.join(", "));
+printOut(numbers2);
 
-// Sort ascending using a callback
-// [...randomNumbers] creates a shallow copy of the array to avoid modifying the original
-// The sort function uses a callback to determine the order
-const ascending = [...randomNumbers].sort(function(a, b) {
-    return a - b;  // If a < b, result is negative → a comes first
+// Sort in ascending order (smallest → largest)
+// The callback (a, b) => a - b defines how two values are compared
+const ascending = [...numbers2].sort(function(a, b) {
+  return a - b;
 });
 
 printOut("Ascending order:");
-printOut(ascending.join(", "));
+printOut(ascending);
 
-// Sort descending using a callback
-const descending = [...randomNumbers].sort(function(a, b) {
-    return b - a;  // If b < a, result is negative → b comes first
+// Sort in descending order (largest → smallest)
+const descending = [...numbers2].sort(function(a, b) {
+  return b - a;
 });
 
 printOut("Descending order:");
-printOut(descending.join(", "));
+printOut(descending);
 
+printOut("Replace this with you answer!");
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");

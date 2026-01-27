@@ -82,6 +82,8 @@ function checkTask3Answers() {
   }
 }
 
+// Task 4
+
 const CarTypes = [
   { value: 1, caption: "Aston Martin" },
   { value: 2, caption: "Bentley" },
@@ -105,7 +107,7 @@ const txtTask4Output = document.getElementById("txtTask4Output");
 //Create radio buttons using a for-loop
 for (let i = 0; i < CarTypes.length; i++) {
   // Create radio input
-  const radio = document.createElement("inout");
+  const radio = document.createElement("input");
   radio.type = "radio";
   radio.name = "carType"; //same name = only one can be selected
   radio.value = CarTypes[i].value;
@@ -125,7 +127,43 @@ for (let i = 0; i < CarTypes.length; i++) {
   divTask4Cars.appendChild(document.createElement("br")); //line break
 }
 
+// Task 5
+
+// Get references to HTML elements
+const selectTask5Animals = document.getElementById("selectTask5Animals");
+const txtTask5Output = document.getElementById("txtTask5Output");
+
+// Event listener for dropdown change
+selectTask5Animals.addEventListener("change", function () {
+  const selectedAnimal = selectTask5Animals.options[selectTask5Animals.selectedIndex].text;
+
+  txtTask5Output.textContent = "You selected: "  + selectedAnimal;
+
+});
+
+// Task 6: Dynamic dropdown list with girls' names
+
 const GirlsNames = ["Anne", "Inger", "Kari", "Marit", "Ingrid", "Liv", "Eva", "Berit", "Astrid", "Bjørg", "Hilde", "Anna", "Solveig", "Marianne", "Randi", "Ida", "Nina", "Maria", "Elisabeth", "Kristin"];
+
+// Get references to HTML elements
+const selectTask6Girls = document.getElementById("selectTask6Girls");
+const txtTask6Output = document.getElementById("txtTask6Output");
+
+// Add names to dropdown from array
+for (let i = 0; i < GirlsNames.length; i++) {
+  const option = document.createElement("option");
+  option.value = GirlsNames[i];
+  option.textContent = GirlsNames[i];
+  selectTask6Girls.appendChild(option);
+}
+
+// Event listener for selection change
+selectTask6Girls.addEventListener("change", function () {
+  txtTask6Output.textContent = "You selected: " + selectTask6Girls.value;
+});
+
+
+// Task 7:Movie table
 
 const MovieGenre = [
   "Action",
@@ -154,23 +192,56 @@ const MovieGenre = [
   "Western",
 ];
 
-//--- Part 1 ----------------------------------------------------------------------------------------------
-/* Put your code below here!*/
+// Get references to HTML elements
+const txtMovieTitle = document.getElementById("txtMovieTitle");
+const selectMovieGenre = document.getElementById("selectMovieGenre");
+const txtMovieDirector = document.getElementById("txtMovieDirector");
+const txtMovieRate = document.getElementById("txtMovieRate");
+const cmbAddMovie = document.getElementById("cmbAddMovie");
+const tblMovies = document.getElementById("tblMovies");
 
-//--- Part 2 ----------------------------------------------------------------------------------------------
-/* Put your code below here!*/
+// Fill genre dropdown dynamically
+for (let i = 0; i < MovieGenre.length; i++) {
+  const option = document.createElement("option");
+  option.value = MovieGenre[i];
+  option.textContent = MovieGenre[i];
+  selectMovieGenre.appendChild(option);
+}
 
-//--- Part 3 ----------------------------------------------------------------------------------------------
-/* Put your code below here!*/
+// Counter for numbering movies
+let movieNumber = 1;
 
-//--- Part 4 ----------------------------------------------------------------------------------------------
-/* Put your code below here!*/
+// Add movie to table when button is clicked
+cmbAddMovie.addEventListener("click", function () {
 
-//--- Part 5 ----------------------------------------------------------------------------------------------
-/* Put your code below here!*/
+  // Create a new table row
+  const row = document.createElement("tr");
 
-//--- Part 6 ----------------------------------------------------------------------------------------------
-/* Put your code below here!*/
+  // Create table cells
+  const cellNr = document.createElement("td");
+  const cellTitle = document.createElement("td");
+  const cellGenre = document.createElement("td");
+  const cellDirector = document.createElement("td");
+  const cellRate = document.createElement("td");
 
-//--- Part 7 ----------------------------------------------------------------------------------------------
-/* Put your code below here!*/
+  // Fill table cells with input values
+  cellNr.textContent = movieNumber;
+  cellTitle.textContent = txtMovieTitle.value;
+  cellGenre.textContent = selectMovieGenre.value;
+  cellDirector.textContent = txtMovieDirector.value;
+  cellRate.textContent = txtMovieRate.value;
+
+  // Append cells to the row
+  row.appendChild(cellNr);
+  row.appendChild(cellTitle);
+  row.appendChild(cellGenre);
+  row.appendChild(cellDirector);
+  row.appendChild(cellRate);
+
+  // Add row to table
+  tblMovies.appendChild(row)
+
+  // Increase movie number
+  movieNumber++;
+
+});
