@@ -1,6 +1,9 @@
 "use strict";
 //--------------- Objects and Variables ----------------------------------//
 import { TSpriteCanvas } from "libSprite";
+import { TGameBoard } from "./gameBoard.js";
+import { addRandomButton, resetSequence } from "./sequence.js";
+
 
 // prettier-ignore
 export const SpriteInfoList = {
@@ -15,13 +18,34 @@ export const SpriteInfoList = {
 
 const cvs = document.getElementById("cvs");
 const spcvs = new TSpriteCanvas(cvs);
+const gameBoard = new TGameBoard(spcvs, SpriteInfoList);
 
-export const EGameStatusType = { Idle: 0 };
+export const EGameStatusType = { Idle: 0, Computer: 1, Gamer: 2, GameOver: 3, state: 0 };
 
 export const gameProps = {
 };
 
 //--------------- Functions ----------------------------------------------//
+export function resetGame() {
+  resetSequence();
+  EGameStatusType.state = EGameStatusType.Idle;
+}
+
+export function updateRound(aRound) {
+  gameBoard.spRound.value = aRound;
+}
+
+export function gameOver() {
+  EGameStatusType.state = EGameStatusType.GameOver;
+  gameBoard.gameOver(); 
+}
+
+export function spawnColorButton() {
+  EGameStatusType.state = EGameStatusType.Computer;
+  const colorButtons = gameBoard.colorButtons;
+  addRandomButton(colorButtons)
+}
+
 function loadGame() {
   cvs.width = SpriteInfoList.Background.width;
   cvs.height = SpriteInfoList.Background.height;
@@ -31,6 +55,7 @@ function loadGame() {
 
 function drawGame() {
   // Always draw all game elements, just control their visibility with the visible property
+  gameBoard.draw()
 }
 
 
