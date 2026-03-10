@@ -68,4 +68,12 @@ export class THero extends TSprite {
     this.#speed = -3.5;
     this.rotation = 0;
   }
+
+  restart() {
+    this.x = 100;
+    this.y = 20;
+    this.rotation = 0;
+    this.#speed = 0;
+    this.animationSpeed = 20;
+  }
 }

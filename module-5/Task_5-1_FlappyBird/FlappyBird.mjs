@@ -2,7 +2,7 @@
 // Import necessary modules
 import { TSpriteCanvas } from "libSprite";
 import { TBackground } from "./background.js";
-import { THero } from "./hero.js";
+import { THero } from "./Hero.js";
 import { TObstacle } from "./obstacle.js";
 import { TBait } from "./bait.js";
 import { TMenu } from "./menu.js";
@@ -32,21 +32,39 @@ const SpriteInfoList = {
 };
 
 export const EGameStatus = { idle: 0, countDown: 1, gaming: 2, heroIsDead: 3, gameOver: 4, state: 0 };
+export let soundMuted = false;
 const background = new TBackground(spcvs, SpriteInfoList);
 export const hero = new THero(spcvs, SpriteInfoList.hero1);
 const obstacles = [];
 const baits = [];
 export const menu = new TMenu(spcvs, SpriteInfoList);
+// Used to prevent scoring multiple times for the same obstacle pair.
 let obstaclePassed = false;
+// Current visual theme used by background + newly spawned obstacles.
+let isDayMode = true;
+// Guards game-over UI so it is shown once per run.
+let gameOverShown = false;
 
 //--------------- Functions ----------------------------------------------//
 export function startGame() {
+  // Gameplay starts after menu countdown.
   EGameStatus.state = EGameStatus.gaming;
+  gameOverShown = false;
   setTimeout(spawnObstacle, 1000);
   setTimeout(spawnBait, 1000);
 }
 
+export function resetWorld() {
+  // Full world reset before starting a new run.
+  hero.restart();
+  obstacles.length = 0;
+  baits.length = 0;
+  obstaclePassed = false;
+  gameOverShown = false;
+}
+
 function spawnBait() {
+  // Keep spawning only while actively playing.
   if (EGameStatus.state === EGameStatus.gaming) {
     const bait = new TBait(spcvs, SpriteInfoList.food);
     baits.push(bait);
@@ -56,8 +74,9 @@ function spawnBait() {
 }
 
 function spawnObstacle() {
+  // Keep spawning only while actively playing.
   if (EGameStatus.state === EGameStatus.gaming) {
-    const obstacle = new TObstacle(spcvs, SpriteInfoList.obstacle);
+    const obstacle = new TObstacle(spcvs, SpriteInfoList.obstacle, isDayMode);
     obstacles.push(obstacle);
     const nextTime = Math.ceil(Math.random() * 3) + 1;
     setTimeout(spawnObstacle, nextTime * 1000);
@@ -65,7 +84,16 @@ function spawnObstacle() {
 }
 
 function animateGame() {
+  // Hero animation always runs (idle bobbing, gravity, death fall...).
   hero.animate();
+
+  // Show game-over menu exactly once when run ends.
+  if ((EGameStatus.state === EGameStatus.heroIsDead || EGameStatus.state === EGameStatus.gameOver) && !gameOverShown) {
+    gameOverShown = true;
+    menu.showGameOver();
+  }
+
+  // Detect bait eaten by hero.
   let eaten = -1;
   for (let i = 0; i < baits.length; i++) {
     const bait = baits[i];
@@ -78,6 +106,8 @@ function animateGame() {
     console.log("Eaten!");
     baits.splice(eaten, 1);
     hero.eat();
+    // +1 point for each eaten bait.
+    menu.incGameScore(1);
   }
 
   if (EGameStatus.state === EGameStatus.gaming) {
@@ -87,10 +117,12 @@ function animateGame() {
       const obstacle = obstacles[i];
       obstacle.animate();
       if (obstacle.x < -50) {
+        // Remove obstacle pair when off-screen.
         deleteObstacle = true;
         obstaclePassed = false;
       }else if((obstacle.x + obstacle.width) < hero.x){
         if(!obstaclePassed){
+          // +1 point when hero passes an obstacle pair.
           menu.incGameScore(1);
           obstaclePassed = true;
         }
@@ -103,6 +135,7 @@ function animateGame() {
 }
 
 function drawGame() {
+  // Draw order controls visual layers (back -> front).
   background.drawBackground();
   for (let i = 0; i < baits.length; i++) {
     const bait = baits[i];
@@ -143,13 +176,22 @@ function onKeyDown(aEvent) {
 } // end of onKeyDown
 
 function setSoundOnOff() {
-  // Mute or unmute the game sound based on checkbox
+  // Read checkbox state and pass to menu audio handler.
+  soundMuted = chkMuteSound.checked;
+  menu.setSoundMute(soundMuted);
 } // end of setSoundOnOff
 
 function setDayNight(aEvent) {
-  // Set day or night mode based on radio buttons
-  // Day mode is when value is 1, night mode is 0, you can use this as a boolean, 1=true, 0=false
-  // e.g., isDayMode = (aEvent.target.value == 1);
+  // Radio value is "1" for day and "0" for night.
+  isDayMode = Number(aEvent.target.value) === 1;
+  // Update current background immediately.
+  background.setDayNight(isDayMode);
+
+  // Update already spawned obstacles immediately.
+  for (let i = 0; i < obstacles.length; i++) {
+    obstacles[i].setDayNight(isDayMode);
+  }
+
   console.log(`Day/Night mode changed: ${aEvent.target.value}`);
 } // end of setDayNight
 
@@ -157,6 +199,16 @@ function setDayNight(aEvent) {
 chkMuteSound.addEventListener("change", setSoundOnOff);
 rbDayNight[0].addEventListener("change", setDayNight);
 rbDayNight[1].addEventListener("change", setDayNight);
+
+// Apply initial mute state from checkbox
+setSoundOnOff();
+
+// Apply initial day/night state from radio buttons
+if (rbDayNight[0].checked) {
+  setDayNight({ target: rbDayNight[0] });
+} else {
+  setDayNight({ target: rbDayNight[1] });
+}
 
 // Load the sprite sheet
 spcvs.loadSpriteImage("./Media/FlappyBirdSprites.png", loadGame);

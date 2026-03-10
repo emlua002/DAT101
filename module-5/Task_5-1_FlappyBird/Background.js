@@ -19,6 +19,10 @@ export class TBackground{
     this.#spriteGround.draw();
   }
 
+  setDayNight(aIsDayMode){
+    this.#spriteBackground.index = aIsDayMode ? 0 : 1;
+  }
+
   animate(){
     const x = this.#spriteGround.x + (this.#spriteGround.width / 2);
     if(x < 5){
